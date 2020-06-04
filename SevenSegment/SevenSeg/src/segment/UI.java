@@ -20,7 +20,7 @@ public class UI extends JPanel {
 	 */
 	private static final long serialVersionUID = -4621924450652779205L;
 	private Segment[] segment = new Segment[8];
-	private  int value;
+	private  float value;
 	public UI()
 	{
 		setSize(880, 300);
@@ -49,25 +49,93 @@ public class UI extends JPanel {
 		}
                 
 	}
+        //private int x = value%1;
         
-        
-        public void setValue (int value){
+        public void setValue (float value){
             try{
+                //System.out.println(x);
+                if (value >= 0 && value < 10)
+            {
+                if( value % 1 == 0){
                 
-                if (value >= 0 && value < 1000)
+                for (int i = 0; i < 8; i++){
+                segment[0].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getFDigit()][i] == true));
+                segment[1].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getFDigit()][i] == true));
+                segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 1)][i] == true));
+            }}
+                else //if( value%1 =! 0 )
+                {
+                    value = value*100;
+                    for (int i = 0; i < 8; i++){
+                segment[0].getPanelSeg(i).setVisible((Binary.DOTBIN[Binary.getNthDigit(value, 10, 3)][i] == true));
+                segment[1].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 2)][i] == true));
+                segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 1)][i] == true));
+            }
+            }
+            }
+            else if( value >= 10 && value < 99)
+            {
+                if( value % 1 == 0){
+                
+                for (int i = 0; i < 8; i++){
+                segment[0].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getFDigit()][i] == true) ? true : false);
+                segment[1].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 2)][i] == true) ? true : false);
+                segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 1)][i] == true) ? true : false);
+            }}
+                else
+                {
+                    value = value*10;
+                    for (int i = 0; i < 8; i++){
+                segment[0].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 3)][i] == true) ? true : false);
+                segment[1].getPanelSeg(i).setVisible((Binary.DOTBIN[Binary.getNthDigit(value, 10, 2)][i] == true) ? true : false);
+                segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 1)][i] == true) ? true : false);
+            }
+            }  
+            } 
+            else if( value >= 100  && value < 999)
             {
                 for (int i = 0; i < 8; i++){
                 segment[0].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 3)][i] == true) ? true : false);
                 segment[1].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 2)][i] == true) ? true : false);
                 segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(value, 10, 1)][i] == true) ? true : false);
-            }}
-            else if( value < 0 && value >= -99){
+            }
+            }  
+            else if( value <= -10 && value >= -99){
+                
                 for (int i = 0; i < 8; i++){
                 segment[0].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getMDigit()][i] == true) ? true : false);
-                int val = value > 0 ? value : -value;
+                float val = value > 0 ? value : -value;
                 segment[1].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(val, 10, 2)][i] == true) ? true : false);
                 segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(val, 10, 1)][i] == true) ? true : false);
+                
+            }
+                int v;
+            
+            }
+            else if( value < 0 && value > -10){
+                if( value % 1 == 0){
+                for (int i = 0; i < 8; i++){
+                segment[0].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getFDigit()][i] == true) ? true : false);
+                float val = value > 0 ? value : -value;
+                segment[1].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getMDigit()][i] == true) ? true : false);
+                segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(val, 10, 1)][i] == true) ? true : false);
             }}
+                else{
+                    value = value*10;
+                    for (int i = 0; i < 8; i++){
+                segment[0].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getMDigit()][i] == true) ? true : false);
+                float val = value > 0 ? value : -value;
+                segment[1].getPanelSeg(i).setVisible((Binary.DOTBIN[Binary.getNthDigit(val, 10, 2)][i] == true) ? true : false);
+                segment[2].getPanelSeg(i).setVisible((Binary.CLOCKBIN[Binary.getNthDigit(val, 10, 1)][i] == true) ? true : false);
+            }
+                }
+            
+            
+            
+            }
+            
+            
+            
             else {
                 setError();
             }
@@ -83,12 +151,13 @@ public class UI extends JPanel {
         public void setError()
         {
             for (int i = 0; i < 8; i++){
+                
                 segment[0].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getEDigit()][i] == true) ? true : false);
                 segment[1].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getRDigit()][i] == true) ? true : false);
                 segment[2].getPanelSeg(i).setVisible((Binary.LETTERBIN[Binary.getRDigit()][i] == true) ? true : false);
                 }
         }
-        public int getValue()
+        public float getValue()
         {
             
             
@@ -96,4 +165,5 @@ public class UI extends JPanel {
             return value;
         }
          
+        
 }

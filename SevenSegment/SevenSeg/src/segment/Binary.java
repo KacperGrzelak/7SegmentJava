@@ -26,15 +26,30 @@ public class Binary {
 			 new boolean[] { true, true, true, true, false, true, true, false },			// 9
                          
                 };
+    public static final boolean[][] DOTBIN = 
+		{
+			 new boolean[] { true, true, true, true, true, true, false, true }, 			// 0
+			 new boolean[] { false, true, true, false, false, false, false, true }, 		// 1	
+			 new boolean[] { true, true, false, true, true, false, true, true },			// 2
+			 new boolean[] { true, true, true, true, false, false, true, true },			// 3
+			 new boolean[] { false, true, true, false, false, true, true, true },			// 4
+			 new boolean[] { true, false, true, true, false, true, true, true },			// 5
+			 new boolean[] { true, false, true, true, true, true, true, true },			// 6
+			 new boolean[] { true, true, true, false, false, false, false, true },                 // 7
+			 new boolean[] { true, true, true, true, true, true, true, true },			// 8
+			 new boolean[] { true, true, true, true, false, true, true, true },			// 9
+                         
+                };
 	
-	public static int getNthDigit(int number, int base, int n) { return (int) ((number / Math.pow(base, n - 1)) % base); }
+	public static int getNthDigit(float number, int base, int n) { return (int) ((number / Math.pow(base, n - 1)) % base); }
         
         public static final boolean[][] LETTERBIN =
         {
                         new boolean[] { true, false, false, true, true, true, true, false },                    // E
                         new boolean[] { true, true, false, false, true, true, false, false },                   // R
                         new boolean[] { false, false, false, false, false, false, true, false },                 // -
-                        new boolean[] { false, false, false, false, false, false, false, false }
+                        new boolean[] { false, false, false, false, false, false, false, false },
+                        new boolean[] { false, false, false, false, false, false, false, true }  //.
         };
         public static int getEDigit()
         {
@@ -51,5 +66,9 @@ public class Binary {
         public static int getFDigit()
         {
             return 3;
+        }
+        public static int getDDigit()
+        {
+            return 4;
         }
 }

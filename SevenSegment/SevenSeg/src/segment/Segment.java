@@ -27,6 +27,8 @@ public class Segment extends JPanel {
 	
 	private JPanel[] pnlSeg;
 	
+
+        
 	public JPanel getPanelSeg(int index)
 	{
 		return this.pnlSeg[index];
