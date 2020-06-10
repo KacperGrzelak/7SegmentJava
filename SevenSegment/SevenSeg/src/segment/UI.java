@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -24,10 +25,9 @@ public class UI extends JPanel {
 	public UI()
 	{
 		setSize(880, 300);
-		FlowLayout layout = new FlowLayout();
+		GridLayout layout = new GridLayout();
 		layout.setHgap(8);
 		layout.setVgap(0);
-		layout.setAlignment(FlowLayout.LEFT);
 		setLayout(layout);
 		Dimension dim = new Dimension();
 		
